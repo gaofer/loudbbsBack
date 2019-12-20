@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbgc.loudbbs.loudbbs.mapper.TUsersMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hbgc.loudbbs.loudbbs.entity.TUsers">
+        <id column="uid" property="uid" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="gender" property="gender" />
+        <result column="birthday" property="birthday" />
+        <result column="avatar" property="avatar" />
+        <result column="email" property="email" />
+        <result column="phone" property="phone" />
+        <result column="access" property="access" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        uid, username, password, gender, birthday, avatar, email, phone, access
+    </sql>
+
+</mapper>

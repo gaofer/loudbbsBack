@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hbgc.loudbbs.loudbbs.mapper.TTopicMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hbgc.loudbbs.loudbbs.entity.TTopic">
+        <id column="tid" property="tid" />
+        <result column="topicname" property="topicname" />
+        <result column="uid" property="uid" />
+        <result column="cid" property="cid" />
+        <result column="heat" property="heat" />
+        <result column="mainbody" property="mainbody" />
+        <result column="createtime" property="createtime" />
+        <result column="updatetime" property="updatetime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        tid, topicname, uid, cid, heat, mainbody, createtime, updatetime
+    </sql>
+
+</mapper>
