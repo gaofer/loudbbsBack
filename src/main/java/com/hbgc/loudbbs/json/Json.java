@@ -49,4 +49,11 @@ public class Json {
         map.put("msg", "error");
         return map;
     }
+
+    public static Map<String, Object> imgsuccess(Object data) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("errno", 0);
+        map.put("data", data);
+        return map;
+    }
 }

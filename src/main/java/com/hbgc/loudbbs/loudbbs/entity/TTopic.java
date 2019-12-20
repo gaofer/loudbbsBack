@@ -33,6 +33,8 @@ public class TTopic implements Serializable {
 
     private Integer heat;
 
+    private String htmlmainbody;
+
     private String mainbody;
 
     private String createtime;

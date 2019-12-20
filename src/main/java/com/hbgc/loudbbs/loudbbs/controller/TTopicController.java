@@ -6,10 +6,24 @@ import com.hbgc.loudbbs.loudbbs.entity.TTopic;
 import com.hbgc.loudbbs.loudbbs.mapper.TTopicMapper;
 import com.hbgc.loudbbs.loudbbs.service.TTopicService;
 import com.hbgc.loudbbs.loudbbs.vo.TTopicVO;
+import com.hbgc.loudbbs.utils.MyUtils;
+import org.apache.logging.log4j.util.PropertiesUtil;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +43,12 @@ public class TTopicController {
     private TTopicService topicService;
     @Resource
     private TTopicMapper topicMapper;
+
+    @Value("${upload.win.path}")
+    private String uploadWinPath;
+
+    @Value("${upload.linux.path}")
+    private String  uploadLinuxPath;
 
 
     @GetMapping("/")
@@ -79,6 +99,33 @@ public class TTopicController {
             return Json.fail("查询失败");
         }
     }
+
+
+    @PostMapping("upload")
+    public Map<String, Object> loadFiles(MultipartFile file, HttpServletRequest request) {
+        System.out.println("执行上传...");
+        //Map<String, Object> map = new HashMap<String, Object>();
+        //获得上传的路径
+        //String path = request.getSession().getServletContext().getRealPath("/upload");
+
+        String path = null;
+        //先判断一下当前是什么操作
+
+        if("windows".equals(MyUtils.getOperateSysName())){
+            path = this.uploadWinPath;
+        }else{
+            path = this.uploadLinuxPath;
+        }
+
+        try {
+            String uploadSuccessFileName = MyUtils.uploadFile(file, path);
+            return Json.imgsuccess(uploadSuccessFileName);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Json.fail("文件上传失败！");
+        }
+    }
+
 
 }
 

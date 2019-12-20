@@ -9,6 +9,7 @@
         <result column="uid" property="uid" />
         <result column="cid" property="cid" />
         <result column="heat" property="heat" />
+        <result column="htmlmainbody" property="htmlmainbody" />
         <result column="mainbody" property="mainbody" />
         <result column="createtime" property="createtime" />
         <result column="updatetime" property="updatetime" />
@@ -16,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        tid, topicname, uid, cid, heat, mainbody, createtime, updatetime
+        tid, topicname, uid, cid, heat, htmlmainbody, mainbody, createtime, updatetime
     </sql>
 
 </mapper>
