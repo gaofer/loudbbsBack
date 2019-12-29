@@ -15,12 +15,21 @@ public class TTopicVO implements Serializable {
     private String topicname;
     private Integer heat;
     private String mainbody;
+    private String htmlmainbody;
     private String createtime;
     private String updatetime;
     private String username;
     private Integer uid;
     private String cname;
 
+
+    public String getHtmlmainbody() {
+        return htmlmainbody;
+    }
+
+    public void setHtmlmainbody(String htmlmainbody) {
+        this.htmlmainbody = htmlmainbody;
+    }
 
     public String getCname() {
         return cname;

@@ -74,25 +74,45 @@ public class TCategoryController {
     }
 
     /**
+     * 根据类别编号修改类别
+     * @param category
+     * @return
+     */
+    @PostMapping("/update")
+    public Map<String,Object> updateCategory(@RequestBody TCategory category){
+        try{
+            boolean b = categoryService.updateById(category);
+            if(b) {
+                return Json.success("","修改成功"); //注册成功
+            }else{
+                return Json.fail("修改失败"); //注册失败
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return Json.fail("修改失败"); //注册失败
+        }
+
+    }
+
+    /**
      * 根据类别编号删除类别
      * @param cid
      * @return
      */
-    @DeleteMapping("/")
-    public Map<String,Object> deleteCategory(@RequestBody int cid){
-
+    @DeleteMapping("/{cid}")
+    public Map<String,Object> deleteCategory(@PathVariable("cid") int cid){
         QueryWrapper<TCategory> logWrapper = new QueryWrapper<>();
         logWrapper.eq("cid",cid);
         try{
             boolean b = categoryService.remove(logWrapper);
             if(b) {
-                return Json.success("","删除成功"); //注册成功
+                return Json.success("","删除成功");
             }else{
-                return Json.fail("删除失败"); //注册失败
+                return Json.fail("删除失败");
             }
         }catch(Exception ex){
             ex.printStackTrace();
-            return Json.fail("删除失败"); //注册失败
+            return Json.fail("删除失败");
         }
 
     }

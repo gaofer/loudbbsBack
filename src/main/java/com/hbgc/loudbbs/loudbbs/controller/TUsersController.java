@@ -99,6 +99,22 @@ public class TUsersController {
         }
     }
 
+    @PostMapping(value = "/update")
+    public Map<String,Object> updateUser(@RequestBody TUsers updateUser){
+        //TUsers u = null;
+        try{
+            boolean u = usersService.updateById(updateUser);
+            if(u) {
+                return Json.success(null,"升级管理员成功"); //注册成功
+            }else{
+                return Json.fail("升级管理员失败"); //注册失败
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return Json.fail("升级管理员失败"); //注册失败
+        }
+    }
+
 
 }
 

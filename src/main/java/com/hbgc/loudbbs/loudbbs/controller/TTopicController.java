@@ -7,9 +7,6 @@ import com.hbgc.loudbbs.loudbbs.mapper.TTopicMapper;
 import com.hbgc.loudbbs.loudbbs.service.TTopicService;
 import com.hbgc.loudbbs.loudbbs.vo.TTopicVO;
 import com.hbgc.loudbbs.utils.MyUtils;
-import org.apache.logging.log4j.util.PropertiesUtil;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,19 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author Gaofer
@@ -44,60 +34,80 @@ public class TTopicController {
     @Resource
     private TTopicMapper topicMapper;
 
-    @Value("${upload.win.path}")
-    private String uploadWinPath;
-
-    @Value("${upload.linux.path}")
-    private String  uploadLinuxPath;
-
 
     @GetMapping("/")
-    public Map<String,Object> getAll(){
+    public Map<String, Object> getAll() {
         List<TTopicVO> topicList;
-        try{
-            topicList=topicMapper.getTopicVO();
-            if(topicList!=null){
-                return Json.success(topicList,"获取话题列表成功");
+        try {
+            topicList = topicMapper.getTopicVO();
+            if (topicList != null) {
+                return Json.success(topicList, "获取话题列表成功");
             }
             return Json.fail("查询失败");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Json.fail("查询失败");
         }
     }
 
     @PostMapping("/addtopic")
-    public Map<String,Object> postNewTopic(@RequestBody TTopic newTopic){
-        int heat=0;
-        if(newTopic.getHeat()!=null){
-            heat=newTopic.getHeat()+1;
+    public Map<String, Object> postNewTopic(@RequestBody TTopic newTopic) {
+        int heat = 0;
+        if (newTopic.getHeat() != null) {
+            heat = newTopic.getHeat() + 1;
         }
         newTopic.setHeat(heat);
-        try{
+        try {
             boolean b = topicService.save(newTopic);
-            if(b) {
-                return Json.success("","添加成功"); //注册成功
-            }else{
+            if (b) {
+                return Json.success("", "添加成功"); //注册成功
+            } else {
                 return Json.fail("添加失败"); //注册失败
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return Json.fail("添加失败"); //注册失败
         }
     }
 
-    @GetMapping("/topicdetal/{tid}")
-    public Map<String,Object> topicDetal(@PathVariable("tid") int tid){
-        List<TTopicVO> topicVOList;
-        topicVOList=topicService.getTopicByTid(tid);
-        if(topicVOList!=null){
-            if(topicVOList.size()==0){
-                return Json.success(topicVOList,"无这个值");
+    @PostMapping("/update")
+    public Map<String, Object> updateTopic(@RequestBody TTopic newTopic) {
+        try {
+            boolean b = topicService.updateById(newTopic);
+            if (b) {
+                return Json.success(null, "修改成功"); //注册成功
+            } else {
+                return Json.fail("修改失败"); //注册失败
             }
-            return Json.success(topicVOList,"查询成功");
-        }else{
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Json.fail("修改失败"); //注册失败
+        }
+    }
+
+    @GetMapping("/topicdetal/{tid}")
+    public Map<String, Object> topicDetal(@PathVariable("tid") int tid) {
+        List<TTopicVO> topicVOList;
+        topicVOList = topicService.getTopicByTid(tid);
+        if (topicVOList != null) {
+            if (topicVOList.size() == 0) {
+                return Json.success(topicVOList, "无这个值");
+            }
+            return Json.success(topicVOList, "查询成功");
+        } else {
             return Json.fail("查询失败");
         }
+    }
+
+    @DeleteMapping("/{tid}")
+    public Map<String, Object> Deletetopic(@PathVariable("tid") int tid) {
+        TTopic t = new TTopic();
+        t.setTid(tid);
+        if (topicService.removeById(t)) {
+            return Json.success(null, "删除成功");
+        }
+        return Json.fail("删除失败");
+
     }
 
 
@@ -111,10 +121,10 @@ public class TTopicController {
         String path = null;
         //先判断一下当前是什么操作
 
-        if("windows".equals(MyUtils.getOperateSysName())){
-            path = this.uploadWinPath;
-        }else{
-            path = this.uploadLinuxPath;
+        if ("windows".equals(MyUtils.getOperateSysName())) {
+            //path = this.uploadWinPath;
+        } else {
+            //path = this.uploadLinuxPath;
         }
 
         try {
