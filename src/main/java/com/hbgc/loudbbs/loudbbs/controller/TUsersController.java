@@ -29,6 +29,12 @@ public class TUsersController {
     @Resource
     private TUsersMapper userMapper;
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @GetMapping("/login")
     public Map<String,Object> login(String username, String password){
         TUsers loginUser = null;
