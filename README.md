@@ -2,6 +2,17 @@
 ==
 这是我[另一个项目](https://github.com/gaofer/loudbbs)需要用到的后端代码，代码需要的sql文件已经放在 resources 文件夹下了，需要的话可以转储作为参考。
 
+* [上手指南](#上手指南)
+*  [所用框架](#所用框架)
+*  [相关工具](#相关工具 )
+*  [项目相关说明](#项目相关说明)
+   *  [写在最前面](#写在最前面)
+   *  [接口相关说明](#接口相关说明)
+      *  [用户](#用户)
+      *  [类别](#类别)
+      *  [话题](#话题)
+      *  [评论](#评论)
+*  [作者](#作者)
 
 ## 上手指南
 即克隆即用，需要配置在 application.properties 文件中的数据库相关：地址、密码等。
@@ -11,8 +22,8 @@ SpringBoot
 
 ## 相关工具
 + Druid
-+ Lombok
 + MyBatis
++ Lombok
 + MyBatis Plus
 + MySQL connector
 + MyBatis Plus Generator
