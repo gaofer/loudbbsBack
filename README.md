@@ -11,8 +11,8 @@ SpringBoot
 
 ## 相关工具
 + Druid
-+ Lombok
 + MyBatis
++ Lombok
 + MyBatis Plus
 + MySQL connector
 + MyBatis Plus Generator
