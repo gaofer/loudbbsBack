@@ -153,4 +153,5 @@ SpringBoot
 >> 参数：common 对象  
 >> 返回： null，成功返回状态码200，失败返回400
 ## 作者
-Gaofer Chou. 大概是个自恋狂。
+Gaofer Chou. 大概是个自恋狂。  
+<img src="https://github.com/gaofer/loudbbsBack/blob/master/WeChat.png"  height="150" width="150"/>
