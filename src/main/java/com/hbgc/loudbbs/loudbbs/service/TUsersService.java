@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author Gaofer
@@ -13,5 +13,4 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TUsersService extends IService<TUsers> {
     TUsers saveU(TUsers saveu);
-
 }

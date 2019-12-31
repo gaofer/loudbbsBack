@@ -8,15 +8,12 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author Gaofer
  * @since 2019-12-13
  */
 public interface TCommonService extends IService<TCommon> {
-
     List<TCommonVO> getCommonsVO(int tid);
-
-
 }

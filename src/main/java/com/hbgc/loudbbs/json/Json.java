@@ -15,7 +15,7 @@ public class Json {
     }
 
     //自定义消息的成功响应
-    public static Map<String, Object> success(Object data,String msg) {
+    public static Map<String, Object> success(Object data, String msg) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 200);
         map.put("msg", msg);
@@ -23,16 +23,15 @@ public class Json {
         return map;
     }
 
-    public static Map<String, Object> success(Object data,String msg,String token) {
+    //包含token的成功响应
+    public static Map<String, Object> success(Object data, String msg, String token) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("code", 200);
         map.put("msg", msg);
         map.put("data", data);
-        map.put("token",token);
+        map.put("token", token);
         return map;
     }
-
-
 
     //自定义消息的失败响应
     public static Map<String, Object> fail(String msg) {

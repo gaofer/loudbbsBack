@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author Gaofer
@@ -26,17 +26,22 @@ public class TUsersServiceImpl extends ServiceImpl<TUsersMapper, TUsers> impleme
     @Resource
     private TUsersService usersService;
 
-
+    /**
+     * 因为没有保存以后立刻返回保存的对象的方法，所以自己写了一个方法来完成这个功能。
+     *
+     * @param saveu
+     * @return
+     */
     @Override
     public TUsers saveU(TUsers saveu) {
-        TUsers tu=null;
+        TUsers tu = null;
         QueryWrapper<TUsers> logWrapper = new QueryWrapper<>();
-        logWrapper.eq("username",saveu.getUsername());
-        logWrapper.eq("password",saveu.getPassword());
-        if(usersService.save(saveu)){
-            tu=usersService.getOne(logWrapper,false);
+        logWrapper.eq("username", saveu.getUsername());
+        logWrapper.eq("password", saveu.getPassword());
+        if (usersService.save(saveu)) {
+            tu = usersService.getOne(logWrapper, false);
             return tu;
-        }else{
+        } else {
             return null;
         }
     }

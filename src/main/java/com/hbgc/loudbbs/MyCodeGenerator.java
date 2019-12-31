@@ -21,6 +21,7 @@ public class MyCodeGenerator {
      * <p>
      * 读取控制台内容
      * </p>
+     * 这一部分是MyBatis Plus代码自动生成器的相关代码，它会帮助生成包括Controller、entity在内的一系列需要用的java代码，相当方便。
      */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);

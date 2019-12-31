@@ -7,7 +7,6 @@ import com.hbgc.loudbbs.loudbbs.mapper.TTopicMapper;
 import com.hbgc.loudbbs.loudbbs.service.TTopicService;
 import com.hbgc.loudbbs.loudbbs.vo.TTopicVO;
 import com.hbgc.loudbbs.utils.MyUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +33,11 @@ public class TTopicController {
     @Resource
     private TTopicMapper topicMapper;
 
-
+    /**
+     * 获取话题列表，返回一个视图表
+     *
+     * @return List<TTopicVO>
+     */
     @GetMapping("/")
     public Map<String, Object> getAll() {
         List<TTopicVO> topicList;
@@ -50,6 +53,12 @@ public class TTopicController {
         }
     }
 
+    /**
+     * 新建一个话题
+     *
+     * @param newTopic
+     * @return
+     */
     @PostMapping("/addtopic")
     public Map<String, Object> postNewTopic(@RequestBody TTopic newTopic) {
         int heat = 0;
@@ -60,31 +69,43 @@ public class TTopicController {
         try {
             boolean b = topicService.save(newTopic);
             if (b) {
-                return Json.success("", "添加成功"); //注册成功
+                return Json.success("", "添加成功");
             } else {
-                return Json.fail("添加失败"); //注册失败
+                return Json.fail("添加失败");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Json.fail("添加失败"); //注册失败
+            return Json.fail("添加失败");
         }
     }
 
+    /**
+     * 更新话题
+     *
+     * @param newTopic
+     * @return
+     */
     @PostMapping("/update")
     public Map<String, Object> updateTopic(@RequestBody TTopic newTopic) {
         try {
             boolean b = topicService.updateById(newTopic);
             if (b) {
-                return Json.success(null, "修改成功"); //注册成功
+                return Json.success(null, "修改成功");
             } else {
-                return Json.fail("修改失败"); //注册失败
+                return Json.fail("修改失败");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Json.fail("修改失败"); //注册失败
+            return Json.fail("修改失败");
         }
     }
 
+    /**
+     * 根据tid获取话题详情
+     *
+     * @param tid
+     * @return List<TTopicVO>
+     */
     @GetMapping("/topicdetal/{tid}")
     public Map<String, Object> topicDetal(@PathVariable("tid") int tid) {
         List<TTopicVO> topicVOList;
@@ -99,6 +120,12 @@ public class TTopicController {
         }
     }
 
+    /**
+     * 根据tid删除话题
+     *
+     * @param tid
+     * @return
+     */
     @DeleteMapping("/{tid}")
     public Map<String, Object> Deletetopic(@PathVariable("tid") int tid) {
         TTopic t = new TTopic();
@@ -110,7 +137,13 @@ public class TTopicController {
 
     }
 
-
+    /**
+     * 上传图片方法，目前没有用。
+     *
+     * @param file
+     * @param request
+     * @return
+     */
     @PostMapping("upload")
     public Map<String, Object> loadFiles(MultipartFile file, HttpServletRequest request) {
         System.out.println("执行上传...");
